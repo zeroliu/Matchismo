@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UISwitch *gameModeSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegment;
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) CardMatchingGame *game;
 @end
@@ -60,8 +62,18 @@
 - (IBAction)modeSwitch:(UISwitch *)sender
 {
     [self.game turnOnThreeMatchMode:sender.isOn];
+    
+    //Unusual code implementation here just to sync 2 control switches
+    self.gameModeSegment.selectedSegmentIndex = (sender.isOn) ? 0 : 1;
 }
 
+- (IBAction)segmentSwitch:(UISegmentedControl *)sender
+{
+    [self.game turnOnThreeMatchMode:((sender.selectedSegmentIndex) == 0)];
+    
+    //Unusual code implementation here just to sync 2 control switches
+    [self.gameModeSwitch setOn:((sender.selectedSegmentIndex) == 0) animated:YES];
+}
 
 #pragma mark - private method
 - (void) updateUI
