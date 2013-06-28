@@ -89,6 +89,9 @@
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.statusLabel.text = self.game.status;
+    
+    [self.gameModeSwitch setEnabled: !(self.game.gameStarted)];
+    [self.gameModeSegment setEnabled: !(self.game.gameStarted)];
 }
 
 

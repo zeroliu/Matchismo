@@ -11,6 +11,7 @@
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) int score;
 @property (nonatomic, readwrite) NSString *status;
+@property (nonatomic, readwrite) BOOL gameStarted;
 @property (nonatomic, strong) NSMutableArray *cards;
 @property (nonatomic) NSUInteger matchNumber;
 @end
@@ -43,6 +44,7 @@
         }
         self.status = @"Game Start!";
         self.matchNumber = 3;
+        self.gameStarted = NO;
     }
     
     return self;
@@ -58,6 +60,7 @@
 #define FLIP_COST 1
 - (void) flipCardAtIndex:(NSUInteger)index
 {
+    self.gameStarted = YES;
     Card *card = [self cardAtIndex:index];
     
     if (!card.isUnplayable)
