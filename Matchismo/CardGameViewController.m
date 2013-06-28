@@ -48,6 +48,7 @@
     self.flipCount ++;
     [self updateUI];
 }
+
 - (IBAction)deal:(UIButton *)sender
 {
     self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
@@ -55,6 +56,12 @@
     self.flipCount = 0;
     [self updateUI];
 }
+
+- (IBAction)modeSwitch:(UISwitch *)sender
+{
+    [self.game turnOnThreeMatchMode:sender.isOn];
+}
+
 
 #pragma mark - private method
 - (void) updateUI

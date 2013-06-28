@@ -17,6 +17,7 @@
 
 - (Card *)cardAtIndex:(NSUInteger)index;
 
+- (void) turnOnThreeMatchMode:(BOOL)isOn;
 @property (nonatomic, readonly) int score;
 @property (nonatomic, readonly) NSString *status;
 

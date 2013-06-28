@@ -79,6 +79,35 @@
             score = 4;
         }
     }
+    else if ([otherCards count] == 2)
+    {
+        int matchingType = 0; //1 suit match, 2 rank match
+        for (PlayingCard *card in otherCards)
+        {
+            if ((matchingType == 0 || matchingType == 1) && [card.suit isEqualToString:self.suit])
+            {
+                matchingType = 1;
+            }
+            else if ((matchingType == 0 || matchingType == 2) && card.rank == self.rank)
+            {
+                matchingType = 2;
+            }
+            else
+            {
+                matchingType = 0;
+                break;
+            }
+        }
+
+        if (matchingType == 1)
+        {
+            score = 2;
+        }
+        else if (matchingType == 2)
+        {
+            score = 8;
+        }
+    }
     
     return score;
 }
