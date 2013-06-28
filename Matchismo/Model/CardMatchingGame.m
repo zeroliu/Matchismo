@@ -40,6 +40,7 @@
                 self.cards[i] = card;
             }
         }
+        self.status = @"Game Start!";
     }
     
     return self;
