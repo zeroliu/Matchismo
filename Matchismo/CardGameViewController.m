@@ -53,8 +53,7 @@
 
 - (IBAction)deal:(UIButton *)sender
 {
-    self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                  usingDeck:[[PlayingCardDeck alloc] init]];
+    self.game = nil;
     self.flipCount = 0;
     [self updateUI];
 }
@@ -90,7 +89,6 @@
         [cardButton setImage:[UIImage imageNamed:@"clear.jpg"] forState:UIControlStateSelected|UIControlStateDisabled];
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
-        NSLog([[cardButton imageForState:UIControlStateSelected] description]);
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.statusLabel.text = self.game.status;
