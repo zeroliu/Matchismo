@@ -8,14 +8,14 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
-#import "CardMatchingGame.h"
+#import "CardGame.h"
 
 @interface AbstractCardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
-@property (nonatomic) int flipCount;
+@property (nonatomic) NSUInteger flipCount;
 @end
 
 @interface CardGameViewController()
@@ -27,8 +27,9 @@
 #pragma mark - setter and getter
 - (CardGame *) game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          usingDeck:[[PlayingCardDeck alloc] init]];
+    if (!_game) _game = [[CardGame alloc] initWithCardCount:[self.cardButtons count]
+                                                          usingDeck:[[PlayingCardDeck alloc] init]
+                                                cardsToMatch:2];
     return _game;
 }
 

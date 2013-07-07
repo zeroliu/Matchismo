@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
-@property (nonatomic) int flipCount;
+@property (nonatomic) NSUInteger flipCount;
 @end
 
 @implementation AbstractCardGameViewController
@@ -26,7 +26,7 @@
 }
 
 #pragma mark - setter and getter
-- (void) setFlipCount:(int)flipCount
+- (void) setFlipCount:(NSUInteger)flipCount
 {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
@@ -42,6 +42,7 @@
 - (IBAction)flipCard:(UIButton *)sender
 {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    [self updateStatus];
     self.flipCount ++;
     [self updateUI];
 }
@@ -51,13 +52,38 @@
     self.game = nil;
     self.flipCount = 0;
     [self updateUI];
+    self.statusLabel.text = @"";
 }
 
 #pragma mark - to be overridden methods
 - (void) updateUI
 {
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.statusLabel.text = self.game.status;
+}
+
+- (void) updateStatus
+{
+    NSString *title = @"";
+    //No match happened
+    if ([self.game.cardsFlipped count])
+    {
+        if ([self.game.cardsFlipped count] < self.game.cardsToMatch)
+        {
+            title = [NSString stringWithFormat:@"Flipped %@", [[self.game.cardsFlipped lastObject] description]];
+        }
+        else
+        {
+            if (self.game.scoreChanged > 0)
+            {
+                title = [NSString stringWithFormat:@"Matched %@ for %d points", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
+            }
+            else
+            {
+                title = [NSString stringWithFormat:@"%@ don't match! %d points penalty", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
+            }
+        }
+    }
+    self.statusLabel.text = title;
 }
 
 #pragma mark - special initializer
