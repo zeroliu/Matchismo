@@ -8,11 +8,14 @@
 
 #import "AbstractCardGameViewController.h"
 #import "CardGame.h"
+#import "GameResult.h"
+
 @interface AbstractCardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) GameResult *gameResult;
 
 @property (nonatomic) NSUInteger flipCount;
 @end
@@ -45,6 +48,7 @@
     [self updateStatus];
     self.flipCount ++;
     [self updateUI];
+    self.gameResult.score = self.game.score;
 }
 
 - (IBAction)deal:(UIButton *)sender
@@ -53,6 +57,7 @@
     self.flipCount = 0;
     [self updateUI];
     self.statusLabel.text = @"";
+    self.gameResult = nil;
 }
 
 #pragma mark - to be overridden methods

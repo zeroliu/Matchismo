@@ -10,6 +10,7 @@
 #import "SetCardDeck.h"
 #import "CardGame.h"
 #import "SetCard.h"
+#import "GameResult.h"
 
 @interface AbstractCardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
@@ -17,10 +18,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (nonatomic) NSUInteger flipCount;
+@property (strong, nonatomic) GameResult *gameResult;
 @end
 
 @implementation SetGameViewController
 @synthesize game = _game;
+@synthesize gameResult = _gameResult;
 
 #pragma mark - setter and getter
 - (CardGame *) game
@@ -29,6 +32,12 @@
                                                           usingDeck:[[SetCardDeck alloc] init]
                                                 cardsToMatch:3];
     return _game;
+}
+
+- (GameResult *) gameResult
+{
+    if (!_gameResult) _gameResult = [[GameResult alloc] initWithGameName:@"Set"];
+    return _gameResult;
 }
 
 #pragma mark - private methods
