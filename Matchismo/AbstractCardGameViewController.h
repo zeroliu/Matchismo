@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CardGame.h"
-@interface AbstractCardGameViewController : UIViewController
-@property (strong, nonatomic) CardGame *game;
-- (void) updateUI;
+@interface AbstractCardGameViewController : UIViewController <UICollectionViewDataSource>
+@property (nonatomic) NSUInteger startingCardCount; //abstract
+@property (nonatomic) NSUInteger toMatchCardCount; //abstract
+
+- (Deck *) createDeck; //abstract
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card; //abstract
+
+
+
 @end

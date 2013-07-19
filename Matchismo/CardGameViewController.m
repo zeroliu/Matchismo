@@ -8,83 +8,58 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
-#import "CardGame.h"
-#import "GameResult.h"
-
-@interface AbstractCardGameViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
-@property (nonatomic) NSUInteger flipCount;
-@property (strong, nonatomic) GameResult *gameResult;
-@end
+#import "SuperCardView.h"
+#import "PlayingCardCollectionCell.h"
 
 @interface CardGameViewController()
 @end
 
 @implementation CardGameViewController
-@synthesize game = _game;
-@synthesize gameResult = _gameResult;
 
 #pragma mark - setter and getter
-- (CardGame *) game
-{
-    if (!_game) _game = [[CardGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          usingDeck:[[PlayingCardDeck alloc] init]
-                                                cardsToMatch:2];
-    return _game;
-}
 
-- (GameResult *) gameResult
-{
-    if (!_gameResult) _gameResult = [[GameResult alloc] initWithGameName:@"Matchismo"];
-    return _gameResult;
-}
+
+//- (GameResult *) gameResult
+//{
+//    if (!_gameResult) _gameResult = [[GameResult alloc] initWithGameName:@"Matchismo"];
+//    return _gameResult;
+//}
 
 #pragma mark - override method
-- (void) updateUI
+//- (void) updateUI
+//{
+//    [super updateUI];
+//    
+//}
+
+-(NSUInteger) startingCardCount
 {
-    [super updateUI];
-    
-    for (UIButton *cardButton in self.cardButtons)
-    {
-        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected|UIControlStateDisabled];
-        cardButton.selected = card.isFaceUp;
-        [cardButton setImageEdgeInsets:UIEdgeInsetsMake(5, 0, 5, 0)];
-        [cardButton setImage:[UIImage imageNamed:@"cardBack.png"] forState:UIControlStateNormal];
-        [cardButton setImage:[UIImage imageNamed:@"clear.jpg"] forState:UIControlStateSelected];
-        [cardButton setImage:[UIImage imageNamed:@"clear.jpg"] forState:UIControlStateSelected|UIControlStateDisabled];
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
-    }
-   
-    
-    //Code written in Assignment 1
-    //Remove for Assignment 2
-//    [self.gameModeSwitch setEnabled: !(self.game.gameStarted)];
-//    [self.gameModeSegment setEnabled: !(self.game.gameStarted)];
+    return 20;
 }
 
-//Code written in Assignment 1
-//Remove for Assignment 2
+-(NSUInteger) toMatchCardCount
+{
+    return 2;
+}
 
-//- (IBAction)modeSwitch:(UISwitch *)sender
-//{
-//    [self.game turnOnThreeMatchMode:sender.isOn];
-//
-//    //Unusual code implementation here just to sync 2 control switches
-//    self.gameModeSegment.selectedSegmentIndex = (sender.isOn) ? 0 : 1;
-//}
-//
-//- (IBAction)segmentSwitch:(UISegmentedControl *)sender
-//{
-//    [self.game turnOnThreeMatchMode:((sender.selectedSegmentIndex) == 0)];
-//
-//    //Unusual code implementation here just to sync 2 control switches
-//    [self.gameModeSwitch setOn:((sender.selectedSegmentIndex) == 0) animated:YES];
-//}
+- (Deck *)createDeck
+{
+    return [[PlayingCardDeck alloc] init];
+}
 
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+{
+    if ([cell isKindOfClass:[PlayingCardCollectionCell class]])
+    {
+        SuperCardView *playingCardView = ((PlayingCardCollectionCell *)cell).playingCardView;
+        if ([card isKindOfClass:[PlayingCard class]])
+        {
+            PlayingCard *playingCard = (PlayingCard *)card;
+            playingCardView.rank = playingCard.rank;
+            playingCardView.suit = playingCard.suit;
+            playingCardView.faceUp = playingCard.isFaceUp;
+            playingCardView.alpha = playingCard.isUnplayable ? 0.3 : 1.0;
+        }
+    }
+}
 @end
