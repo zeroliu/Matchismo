@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SuperCardView.h"
+#import "PlayingCardView.h"
 
 @interface PlayingCardCollectionCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet SuperCardView *playingCardView;
+@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
 
 @end

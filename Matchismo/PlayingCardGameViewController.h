@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AbstractCardGameViewController.h"
 
-@interface CardGameViewController : AbstractCardGameViewController
+@interface PlayingCardGameViewController : AbstractCardGameViewController
 
 @end

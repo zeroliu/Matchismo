@@ -83,19 +83,24 @@
         <!--Set Game View Controller - Set-->
         <scene sceneID="g17-9I-3jq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o5Y-sJ-ofC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="bvv-mZ-Qh7" customClass="SetGameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OSl-HS-VXc">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Baj-Sb-DBs">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="JLr-AV-4F1"/>
-                                    <constraint firstAttribute="height" constant="29" id="bRV-6M-f3Q"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Deal">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnb-Ts-xwf">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCg-Va-lPB">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAD-nk-UgE">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <state key="normal" title="Restart">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -103,59 +108,132 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal:" destination="bvv-mZ-Qh7" eventType="touchUpInside" id="LB0-0t-rxf"/>
+                                    <action selector="deal:" destination="bvv-mZ-Qh7" eventType="touchUpInside" id="XJa-07-5iF"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Flips: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9u-Cv-rR7">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8g-ze-g5E">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <state key="normal" title="Deal 3">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deal:" destination="2" eventType="touchUpInside" id="gtC-YI-ExW"/>
+                                </connections>
+                            </button>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I4h-Mf-hZ1">
+                                <color key="backgroundColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="RUY-Cb-hlu">
+                                    <size key="itemSize" width="61" height="85"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="" reuseIdentifier="SetCard" id="Sdx-YN-OY2" customClass="SetCardCollectionCell">
+                                        <rect key="frame" x="10" y="10" width="61" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="61" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMt-ri-cR7" customClass="SetCardView">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="hMt-ri-cR7" firstAttribute="bottom" secondItem="Sdx-YN-OY2" secondAttribute="bottom" type="default" id="KZY-zw-VV1"/>
+                                            <constraint firstItem="hMt-ri-cR7" firstAttribute="top" secondItem="Sdx-YN-OY2" secondAttribute="top" type="default" id="R5D-h8-f1C"/>
+                                            <constraint firstItem="hMt-ri-cR7" firstAttribute="trailing" secondItem="Sdx-YN-OY2" secondAttribute="trailing" type="default" id="q8I-5o-Fuk"/>
+                                            <constraint firstItem="hMt-ri-cR7" firstAttribute="leading" secondItem="Sdx-YN-OY2" secondAttribute="leading" type="default" id="yiA-ua-epz"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="setCardView" destination="hMt-ri-cR7" id="NT2-Sc-ao2"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="bvv-mZ-Qh7" id="5Uu-hC-LWR"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SCORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L62-Tj-mU0">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Yv-ne-G3S">
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKf-kO-gB6" customClass="SetCardView">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="ACp-dG-3ol"/>
+                                    <constraint firstAttribute="width" constant="34" type="user" id="B2n-YS-axS"/>
+                                    <constraint firstAttribute="height" constant="49" type="user" id="TvL-X5-cez"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="la0-IK-Ios">
+                            </view>
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3t-jl-lSS" customClass="SetCardView">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="7KU-76-tID"/>
+                                    <constraint firstAttribute="height" constant="49" type="user" id="W9p-TF-Mh7"/>
+                                    <constraint firstAttribute="width" constant="34" type="user" id="fsw-Ti-TUi"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="Game Start!">
-                                        <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <font key="NSFont" size="17" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOw-iU-DbA" customClass="SetCardView">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" type="user" id="DdL-Wl-eyG"/>
+                                    <constraint firstAttribute="height" constant="49" type="user" id="pbk-11-lB4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="6Yv-ne-G3S" firstAttribute="centerY" secondItem="Baj-Sb-DBs" secondAttribute="centerY" type="default" id="04T-x7-eMR"/>
-                            <constraint firstItem="la0-IK-Ios" firstAttribute="centerX" secondItem="Baj-Sb-DBs" secondAttribute="centerX" type="default" id="6ZX-iq-w9s"/>
-                            <constraint firstItem="F9u-Cv-rR7" firstAttribute="baseline" secondItem="6Yv-ne-G3S" secondAttribute="baseline" type="default" id="7RU-5b-wcK"/>
-                            <constraint firstAttribute="trailing" secondItem="6Yv-ne-G3S" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="9GP-lz-AKs"/>
-                            <constraint firstItem="Baj-Sb-DBs" firstAttribute="leading" secondItem="F9u-Cv-rR7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="AW1-fV-98W"/>
-                            <constraint firstItem="la0-IK-Ios" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Gbn-wd-Qoe"/>
-                            <constraint firstAttribute="trailing" secondItem="la0-IK-Ios" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="lwg-g2-Z0z"/>
-                            <constraint firstAttribute="bottom" secondItem="Baj-Sb-DBs" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="rqg-3q-7Gc"/>
-                            <constraint firstAttribute="bottom" secondItem="la0-IK-Ios" secondAttribute="bottom" constant="79" id="wby-Br-12N"/>
-                            <constraint firstItem="F9u-Cv-rR7" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="yyb-Hx-n8X"/>
+                            <constraint firstItem="XOw-iU-DbA" firstAttribute="top" secondItem="I4h-Mf-hZ1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3NY-h8-hiD"/>
+                            <constraint firstAttribute="trailing" secondItem="KAD-nk-UgE" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="4MQ-DK-SZ9"/>
+                            <constraint firstItem="MCg-Va-lPB" firstAttribute="leading" secondItem="vnb-Ts-xwf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="64p-q4-Phh"/>
+                            <constraint firstItem="XOw-iU-DbA" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7S9-bG-pJ7"/>
+                            <constraint firstItem="GKf-kO-gB6" firstAttribute="leading" secondItem="XOw-iU-DbA" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ByB-Fd-iqc"/>
+                            <constraint firstAttribute="bottom" secondItem="L62-Tj-mU0" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="FCP-Ha-qz0"/>
+                            <constraint firstItem="L62-Tj-mU0" firstAttribute="top" secondItem="XOw-iU-DbA" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="HCB-5f-rid"/>
+                            <constraint firstItem="m3t-jl-lSS" firstAttribute="leading" secondItem="GKf-kO-gB6" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="LNa-Ic-A89"/>
+                            <constraint firstItem="I8g-ze-g5E" firstAttribute="baseline" secondItem="KAD-nk-UgE" secondAttribute="baseline" type="default" id="NDU-Mj-04V"/>
+                            <constraint firstItem="vnb-Ts-xwf" firstAttribute="baseline" secondItem="MCg-Va-lPB" secondAttribute="baseline" type="default" id="QhS-Pa-zA5"/>
+                            <constraint firstItem="L62-Tj-mU0" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="VGI-of-N4L"/>
+                            <constraint firstItem="m3t-jl-lSS" firstAttribute="top" secondItem="I4h-Mf-hZ1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="XAA-lF-W1w"/>
+                            <constraint firstItem="vnb-Ts-xwf" firstAttribute="leading" secondItem="L62-Tj-mU0" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="b9o-QP-eom"/>
+                            <constraint firstItem="KAD-nk-UgE" firstAttribute="leading" secondItem="I8g-ze-g5E" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ggA-LF-Ee3"/>
+                            <constraint firstAttribute="bottom" secondItem="vnb-Ts-xwf" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="h4r-Sf-Xqe"/>
+                            <constraint firstItem="I4h-Mf-hZ1" firstAttribute="top" secondItem="OSl-HS-VXc" secondAttribute="top" type="default" id="jcV-54-wmG"/>
+                            <constraint firstItem="I4h-Mf-hZ1" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" type="default" id="mnb-If-7Sy"/>
+                            <constraint firstItem="I4h-Mf-hZ1" firstAttribute="trailing" secondItem="OSl-HS-VXc" secondAttribute="trailing" type="default" id="uC2-xa-3VM"/>
+                            <constraint firstAttribute="bottom" secondItem="I8g-ze-g5E" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="zRz-Wf-YXJ"/>
+                            <constraint firstItem="L62-Tj-mU0" firstAttribute="top" secondItem="GKf-kO-gB6" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="zVT-eQ-Haq"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="UUD-Bp-HUv" appends="YES" id="8g4-e8-Otk"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="Hvr-41-wQN"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="flipsLabel" destination="F9u-Cv-rR7" id="7nI-Cp-COU"/>
-                        <outlet property="scoreLabel" destination="6Yv-ne-G3S" id="yNV-lp-TOr"/>
-                        <outlet property="statusLabel" destination="la0-IK-Ios" id="leg-W5-BVe"/>
+                        <outlet property="cardCollectionView" destination="I4h-Mf-hZ1" id="MrV-Ln-Wvk"/>
+                        <outlet property="scoreLabel" destination="vnb-Ts-xwf" id="82L-fD-EXR"/>
+                        <outlet property="scoreUpdateLabel" destination="MCg-Va-lPB" id="xxx-WM-Woe"/>
+                        <outletCollection property="selectedCardsCollection" destination="XOw-iU-DbA" id="QFZ-Eh-X0b"/>
+                        <outletCollection property="selectedCardsCollection" destination="GKf-kO-gB6" id="6lh-kG-F8p"/>
+                        <outletCollection property="selectedCardsCollection" destination="m3t-jl-lSS" id="QAZ-6p-yzw"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o5Y-sJ-ofC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UUD-Bp-HUv">
+                    <connections>
+                        <action selector="flipCard:" destination="bvv-mZ-Qh7" id="bgd-Tu-rlV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-363" y="509"/>
         </scene>
@@ -179,42 +257,27 @@
             </objects>
             <point key="canvasLocation" x="-1015" y="247"/>
         </scene>
-        <!--Card Game View Controller - Match-->
+        <!--Playing Card Game View Controller - Match-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="CardGameViewController" sceneMemberID="viewController">
+                <viewController id="2" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Flips: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XC-Oa-d9q">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeS-90-sP1">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeS-90-sP1">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="4Bf-G6-F5C"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Game Start!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6Ia-De-nFr">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="lDf-rM-RTe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyG-vV-fKi">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFh-Ru-T5S">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="Frp-4A-Y2q"/>
-                                    <constraint firstAttribute="width" constant="73" id="k9b-Pe-ILn"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Deal">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <state key="normal" title="Restart">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -226,26 +289,23 @@
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0XK-3W-cph">
-                                <color key="backgroundColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="292" id="tmK-LK-iPT"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sAw-qX-fKV">
-                                    <size key="itemSize" width="77" height="103"/>
+                                    <size key="itemSize" width="60" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="" reuseIdentifier="PlayingCard" id="QwZ-tq-jZB" customClass="PlayingCardCollectionCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="77" height="103"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="" reuseIdentifier="PlayingCard" id="QwZ-tq-jZB" customClass="PlayingCardCollectionCell">
+                                        <rect key="frame" x="20" y="20" width="60" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="77" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-pf-3oY" customClass="SuperCardView">
+                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-pf-3oY" customClass="PlayingCardView">
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
@@ -267,30 +327,53 @@
                                     <outletCollection property="gestureRecognizers" destination="X5f-af-14D" appends="YES" id="DLS-m3-S1h"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SCORE:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbX-2l-evG">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view opaque="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxs-8N-OhQ" customClass="PlayingCardView">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" type="user" id="n1i-g8-KvH"/>
+                                    <constraint firstAttribute="height" constant="49" type="user" id="uFt-e7-68o"/>
+                                </constraints>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-Ow-emj" customClass="PlayingCardView">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" type="user" id="2WM-Qp-Zo7"/>
+                                    <constraint firstAttribute="height" constant="49" type="user" id="85O-xZ-8Kh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Ia-De-nFr" firstAttribute="top" secondItem="0XK-3W-cph" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3lA-Gq-IgK"/>
+                            <constraint firstItem="bbX-2l-evG" firstAttribute="top" secondItem="JdP-Ow-emj" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="0LG-ez-lbf"/>
                             <constraint firstItem="0XK-3W-cph" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="7ix-yG-ZhN"/>
-                            <constraint firstItem="0XK-3W-cph" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="81d-JK-szh"/>
-                            <constraint firstItem="6Ia-De-nFr" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="BRp-bY-GnD"/>
-                            <constraint firstItem="5XC-Oa-d9q" firstAttribute="baseline" secondItem="zeS-90-sP1" secondAttribute="baseline" type="default" id="KW8-9Q-shU"/>
-                            <constraint firstItem="SFh-Ru-T5S" firstAttribute="leading" secondItem="5XC-Oa-d9q" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="M8W-AZ-0ft"/>
-                            <constraint firstAttribute="trailing" secondItem="zeS-90-sP1" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Rn2-yC-ZgP"/>
+                            <constraint firstItem="zeS-90-sP1" firstAttribute="leading" secondItem="bbX-2l-evG" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="9Fx-KB-Ewe"/>
+                            <constraint firstItem="0XK-3W-cph" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="IDf-jj-Tk2"/>
+                            <constraint firstAttribute="bottom" secondItem="zeS-90-sP1" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="IiH-bf-Z2P"/>
+                            <constraint firstItem="bbX-2l-evG" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Jum-47-PzO"/>
+                            <constraint firstItem="bbX-2l-evG" firstAttribute="top" secondItem="lxs-8N-OhQ" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="OMc-n3-eey"/>
                             <constraint firstItem="0XK-3W-cph" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="SsA-ww-Ywf"/>
-                            <constraint firstItem="SFh-Ru-T5S" firstAttribute="centerX" secondItem="6Ia-De-nFr" secondAttribute="centerX" type="default" id="dZI-Hn-i2g"/>
-                            <constraint firstItem="5XC-Oa-d9q" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="gKz-Da-il8"/>
-                            <constraint firstAttribute="bottom" secondItem="SFh-Ru-T5S" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="mcV-yi-ESQ"/>
-                            <constraint firstAttribute="trailing" secondItem="6Ia-De-nFr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="x9f-fc-gDr"/>
-                            <constraint firstItem="zeS-90-sP1" firstAttribute="centerY" secondItem="SFh-Ru-T5S" secondAttribute="centerY" type="default" id="yqO-zn-sAn"/>
+                            <constraint firstItem="FyG-vV-fKi" firstAttribute="leading" secondItem="zeS-90-sP1" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="cJI-Gg-P1u"/>
+                            <constraint firstAttribute="bottom" secondItem="SFh-Ru-T5S" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="g2Z-76-1Fe"/>
+                            <constraint firstItem="lxs-8N-OhQ" firstAttribute="leading" secondItem="JdP-Ow-emj" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="mxq-2I-WKR"/>
+                            <constraint firstItem="FyG-vV-fKi" firstAttribute="baseline" secondItem="zeS-90-sP1" secondAttribute="baseline" type="default" id="qCA-5U-1mi"/>
+                            <constraint firstItem="JdP-Ow-emj" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sMS-6e-4Ii"/>
+                            <constraint firstAttribute="bottom" secondItem="bbX-2l-evG" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="uHD-kP-EGw"/>
+                            <constraint firstItem="JdP-Ow-emj" firstAttribute="top" secondItem="0XK-3W-cph" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="wEH-r9-ueL"/>
+                            <constraint firstAttribute="trailing" secondItem="SFh-Ru-T5S" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="z85-Ny-4be"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Match" id="iBP-Gg-znS"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="0XK-3W-cph" id="ywJ-0M-CY9"/>
-                        <outlet property="flipsLabel" destination="5XC-Oa-d9q" id="r16-le-fdL"/>
                         <outlet property="scoreLabel" destination="zeS-90-sP1" id="caI-Kh-Fhc"/>
-                        <outlet property="statusLabel" destination="6Ia-De-nFr" id="nUa-MD-2zp"/>
+                        <outlet property="scoreUpdateLabel" destination="FyG-vV-fKi" id="bnp-eS-8Tb"/>
+                        <outletCollection property="selectedCardsCollection" destination="JdP-Ow-emj" id="XzV-hD-svk"/>
+                        <outletCollection property="selectedCardsCollection" destination="lxs-8N-OhQ" id="sNe-xF-YKP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -308,15 +391,12 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AbstractCardGameViewController.h"/>
             <relationships>
                 <relationship kind="action" name="deal:" candidateClass="UIButton"/>
-                <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
+                <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scoreUpdateLabel" candidateClass="UILabel"/>
+                <relationship kind="outletCollection" name="selectedCardsCollection" candidateClass="UIView"/>
             </relationships>
-        </class>
-        <class className="CardGameViewController" superclassName="AbstractCardGameViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
         </class>
         <class className="GameResultViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameResultViewController.h"/>
@@ -333,14 +413,26 @@
         <class className="PlayingCardCollectionCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardCollectionCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="playingCardView" candidateClass="SuperCardView"/>
+                <relationship kind="outlet" name="playingCardView" candidateClass="PlayingCardView"/>
             </relationships>
         </class>
-        <class className="SetGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
+        <class className="PlayingCardGameViewController" superclassName="AbstractCardGameViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardGameViewController.h"/>
         </class>
-        <class className="SuperCardView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SuperCardView.h"/>
+        <class className="PlayingCardView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardView.h"/>
+        </class>
+        <class className="SetCardCollectionCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardCollectionCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="setCardView" candidateClass="SetCardView"/>
+            </relationships>
+        </class>
+        <class className="SetCardView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardView.h"/>
+        </class>
+        <class className="SetGameViewController" superclassName="AbstractCardGameViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
         </class>
         <class className="UICollectionReusableView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>

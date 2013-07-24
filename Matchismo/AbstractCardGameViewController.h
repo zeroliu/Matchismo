@@ -11,10 +11,10 @@
 @interface AbstractCardGameViewController : UIViewController <UICollectionViewDataSource>
 @property (nonatomic) NSUInteger startingCardCount; //abstract
 @property (nonatomic) NSUInteger toMatchCardCount; //abstract
-
+@property (nonatomic) NSString *cellID;//abstract
 - (Deck *) createDeck; //abstract
 - (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card; //abstract
-
+- (void)updateSelectedCardsCollection:(NSArray *)cardViewsCollection usingCards:(NSArray *)cards; //abstract
 
 
 @end

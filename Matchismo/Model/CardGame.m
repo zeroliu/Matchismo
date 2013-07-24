@@ -70,6 +70,7 @@
     Card *card = [self cardAtIndex:index];
     
     [self.cardsFlipped removeAllObjects];
+    self.scoreChanged = 0;
     
     if (!card.isUnplayable)
     {
@@ -112,6 +113,7 @@
             }
             
             self.score -= FLIP_COST;
+            self.scoreChanged -= FLIP_COST;
         }
         card.faceUp = !card.isFaceUp;
         if (card.isFaceUp) [self.cardsFlipped addObject:card];

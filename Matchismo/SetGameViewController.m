@@ -11,6 +11,7 @@
 #import "CardGame.h"
 #import "SetCard.h"
 #import "GameResult.h"
+#import "SetCardCollectionCell.h"
 
 @implementation SetGameViewController
 
@@ -21,98 +22,77 @@
 //    if (!_gameResult) _gameResult = [[GameResult alloc] initWithGameName:@"Set"];
 //    return _gameResult;
 //}
-
-#pragma mark - private methods
-- (NSAttributedString *) getAttributedStringFromCard:(SetCard *)card
+- (NSString *)cellID
 {
-    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:card.contents];
-    
-    //Set color
-    UIColor *strokeColor = [UIColor blackColor]; //black color by default
-    if ([card.color isEqualToString:@"Red"])
-    {
-        strokeColor = [UIColor redColor];
-    }
-    else if ([card.color isEqualToString:@"Green"])
-    {
-        strokeColor = [UIColor greenColor];
-    }
-    else if ([card.color isEqualToString:@"Blue"])
-    {
-        strokeColor = [UIColor blueColor];
-    }
-    
-    UIColor *fillingColor = [strokeColor colorWithAlphaComponent:1];
-    //Set shading
-    //Must be set after color
-    if ([card.shading isEqualToString:@"FULL"])
-    {
-        fillingColor = [strokeColor colorWithAlphaComponent:1];
-    }
-    else if ([card.shading isEqualToString:@"HALF"])
-    {
-        fillingColor = [strokeColor colorWithAlphaComponent:0.1];
-    }
-    else if ([card.shading isEqualToString:@"EMPTY"])
-    {
-        fillingColor = [strokeColor colorWithAlphaComponent:0];
-    }
-    
-    //Add attributes
-    [attributedTitle setAttributes:
-     @{
-//     NSParagraphStyleAttributeName:style,
-    NSForegroundColorAttributeName:fillingColor,
-        NSStrokeColorAttributeName:strokeColor,
-        NSStrokeWidthAttributeName:@-5
-     }
-                             range:NSMakeRange(0, [[attributedTitle string] length])];
-    
-    return attributedTitle;
+    return @"SetCard";
 }
 
-- (NSAttributedString *)getAttributedStringFromCards:(NSArray *)cards
+- (NSUInteger)startingCardCount
 {
-    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] init];
-    for (int i = 0; i < cards.count; i++) {
-        [attributedTitle appendAttributedString:[self getAttributedStringFromCard: cards[i]]];
-        if (i < cards.count-1) [attributedTitle appendAttributedString:[[NSAttributedString alloc] initWithString:@" & "]];
-    }
-    return attributedTitle;
+    return 12;
 }
 
-#pragma mark - override methods
-//- (void) updateUI
-//{
-//    [super updateUI];
-//}
-
-- (void) updateStatus
+- (NSUInteger) toMatchCardCount
 {
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
-//    if ([self.game.cardsFlipped count])
-//    {
-//        //No match happened
-//        if ([self.game.cardsFlipped count] < self.game.cardsToMatch)
-//        {
-//            [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Selected "]];
-//            [attributedString appendAttributedString:[self getAttributedStringFromCard:[self.game.cardsFlipped lastObject]]];
-//        }
-//        else
-//        {
-//            if (self.game.scoreChanged > 0)
-//            {
-//                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Matched "]];
-//                [attributedString appendAttributedString:[self getAttributedStringFromCards:self.game.cardsFlipped]];
-//                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" for %d points", self.game.scoreChanged]]];
-//            }
-//            else
-//            {
-//                [attributedString appendAttributedString:[self getAttributedStringFromCards:self.game.cardsFlipped]];
-//                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" don't match! %d points penalty", self.game.scoreChanged]]];
-//            }
-//        }
-//    }
-//    self.statusLabel.attributedText = attributedString;
+    return 3;
+}
+
+- (Deck *) createDeck
+{
+    return [[SetCardDeck alloc] init];
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+{
+    if ([cell isKindOfClass:[SetCardCollectionCell class]])
+    {
+        SetCardView *setCardView = ((SetCardCollectionCell *)cell).setCardView;
+        if ([card isKindOfClass:[SetCard class]])
+        {
+            SetCard *setCard = (SetCard *)card;
+            setCardView.faceUp = setCard.isFaceUp;
+            setCardView.number = setCard.number;
+            setCardView.shading = setCard.shading;
+            setCardView.symbol = setCard.symbol;
+            setCardView.color = setCard.color;
+        }
+    }
+}
+
+- (void)updateSelectedCardsCollection:(NSArray *)cardViewsCollection usingCards:(NSArray *)cards
+{
+    [super updateSelectedCardsCollection:cardViewsCollection usingCards:cards];
+    
+    for (UIView *cardView in cardViewsCollection)
+    {
+        if ([cardView isKindOfClass:[SetCardView class]])
+        {
+            SetCardView *setCardView = (SetCardView *)cardView;
+            int viewIndex = [cardViewsCollection indexOfObject:setCardView];
+            Card *card = nil;
+            if (viewIndex <= (int)[cards count] - 1)
+            {
+                card = [cards objectAtIndex:viewIndex];
+            }
+            if (card && [card isKindOfClass:[SetCard class]])
+            {
+                SetCard *setCard = (SetCard *)card;
+                setCardView.number = setCard.number;
+                setCardView.shading = setCard.shading;
+                setCardView.symbol = setCard.symbol;
+                setCardView.color = setCard.color;
+                setCardView.faceUp = YES;
+            }
+            else
+            {
+                setCardView.number = 0;
+                setCardView.shading = 0;
+                setCardView.symbol = 0;
+                setCardView.color = 0;
+                setCardView.faceUp = NO;
+            }
+        }
+    }
+
 }
 @end

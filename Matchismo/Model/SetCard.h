@@ -8,14 +8,12 @@
 
 #import "Card.h"
 
-
 @interface SetCard : Card
 
-
-@property (nonatomic) NSInteger number;
-@property (nonatomic, strong) NSString *symbol;
-@property (nonatomic, strong) NSString *shading;
-@property (nonatomic, strong) NSString *color;
+@property (nonatomic) NSUInteger number;
+@property (nonatomic) NSUInteger symbol;
+@property (nonatomic) NSUInteger shading;
+@property (nonatomic) NSUInteger color;
 
 + (NSArray *) validSymbol;
 + (NSArray *) validShading;

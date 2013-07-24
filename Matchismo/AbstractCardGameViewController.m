@@ -12,9 +12,9 @@
 #import "Deck.h"
 
 @interface AbstractCardGameViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreUpdateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *selectedCardsCollection;
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @property (strong, nonatomic) GameResult *gameResult;
 @property (strong, nonatomic) CardGame *game;
@@ -26,16 +26,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    //sort selected card view by their tags in ascending order
+    NSSortDescriptor *tagDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:YES];
+    self.selectedCardsCollection = [self.selectedCardsCollection sortedArrayUsingDescriptors:@[tagDescriptor]];
+    [self updateUI];
 }
 
 #pragma mark - setter and getter
-- (void) setFlipCount:(NSUInteger)flipCount
-{
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-}
-
 - (CardGame *) game
 {
     if (!_game) _game = [[CardGame alloc] initWithCardCount:self.startingCardCount
@@ -53,7 +51,7 @@
     {
         int index = indexPath.item;
         [self.game flipCardAtIndex:index];
-        [self updateStatus];
+//        [self updateStatus];
         self.flipCount ++;
         [self updateUI];
         self.gameResult.score = self.game.score;
@@ -65,7 +63,6 @@
     self.game = nil;
     self.flipCount = 0;
     [self updateUI];
-    self.statusLabel.text = @"";
     self.gameResult = nil;
 }
 
@@ -77,10 +74,18 @@
     //abstract
 }
 
+- (void)updateSelectedCardsCollection:(NSArray *)cardViewsCollection usingCards:(NSArray *)cards
+{
+    NSAssert(([cards count] <= [cardViewsCollection count]), @"There are more flipped card than card view, cannot handle this case");
+    //abstract
+}
+
 - (void)updateUI
 {
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    
+    self.scoreLabel.text = [NSString stringWithFormat:@"%d", self.game.score];
+    [self updateScoreChangeUI];
+    [self updateSelectedCardsCollection:self.selectedCardsCollection usingCards:(NSArray *)self.game.cardsFlipped];
+    //Update cards
     for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells])
     {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
@@ -89,30 +94,53 @@
     }
 }
 
-- (void) updateStatus
+#pragma mark - UI update methods
+
+- (void) updateScoreChangeUI
 {
-    NSString *title = @"";
-    //No match happened
-    if ([self.game.cardsFlipped count])
+    if (self.game.scoreChanged != 0)
     {
-        if ([self.game.cardsFlipped count] < self.game.cardsToMatch)
+        if (self.game.scoreChanged > 0)
         {
-            title = [NSString stringWithFormat:@"Flipped %@", [[self.game.cardsFlipped lastObject] description]];
+            self.scoreUpdateLabel.text = [NSString stringWithFormat:@"+%d", self.game.scoreChanged];
+            self.scoreUpdateLabel.textColor = [UIColor greenColor];
         }
         else
         {
-            if (self.game.scoreChanged > 0)
-            {
-                title = [NSString stringWithFormat:@"Matched %@ for %d points", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
-            }
-            else
-            {
-                title = [NSString stringWithFormat:@"%@ don't match! %d points penalty", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
-            }
+            self.scoreUpdateLabel.text = [NSString stringWithFormat:@"%d", self.game.scoreChanged];
+            self.scoreUpdateLabel.textColor = [UIColor redColor];
         }
+        self.scoreUpdateLabel.alpha = 1.0;
     }
-    self.statusLabel.text = title;
+    else
+    {
+        self.scoreUpdateLabel.alpha = 0;
+    }
 }
+
+//- (void) updateStatus
+//{
+//    NSString *title = @"";
+//    //No match happened
+//    if ([self.game.cardsFlipped count])
+//    {
+//        if ([self.game.cardsFlipped count] < self.game.cardsToMatch)
+//        {
+//            title = [NSString stringWithFormat:@"Flipped %@", [[self.game.cardsFlipped lastObject] description]];
+//        }
+//        else
+//        {
+//            if (self.game.scoreChanged > 0)
+//            {
+//                title = [NSString stringWithFormat:@"Matched %@ for %d points", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
+//            }
+//            else
+//            {
+//                title = [NSString stringWithFormat:@"%@ don't match! %d points penalty", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
+//            }
+//        }
+//    }
+//}
 
 #pragma mark - special initializer
 - (void)setup
@@ -147,7 +175,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PlayingCard" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.cellID forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
     [self updateCell:cell usingCard:card];
     return cell;

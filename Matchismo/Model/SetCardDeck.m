@@ -15,18 +15,18 @@
     self = [super init];
     if (self)
     {
-        for (NSString *symbol in [SetCard validSymbol])
+        for (NSNumber *symbol in [SetCard validSymbol])
         {
-            for (NSString *shading in [SetCard validShading])
+            for (NSNumber *shading in [SetCard validShading])
             {
-                for (NSString *color in [SetCard validColor])
+                for (NSNumber *color in [SetCard validColor])
                 {
                     for (int number = 1; number <= [SetCard maxNumber]; number ++)
                     {
                         SetCard *card = [[SetCard alloc] init];
-                        card.symbol = symbol;
-                        card.shading = shading;
-                        card.color = color;
+                        card.symbol = [symbol unsignedIntegerValue];
+                        card.shading = [shading unsignedIntegerValue];
+                        card.color = [color unsignedIntegerValue];
                         card.number = number;
                         [self addCard:card atTop:YES];
                     }

@@ -1,28 +1,28 @@
 //
-//  SuperCardView.m
+//  PlayingCardView.m
 //  SuperCard
 //
 //  Created by Xiyuan Liu on 7/9/13.
 //  Copyright (c) 2013 Xiyuan Liu. All rights reserved.
 //
 
-#import "SuperCardView.h"
+#import "PlayingCardView.h"
 
-@interface SuperCardView ()
+@interface PlayingCardView ()
 @property (nonatomic) CGFloat faceCardScaleFactor;
 @end
 
-@implementation SuperCardView
+@implementation PlayingCardView
 @synthesize faceCardScaleFactor = _faceCardScaleFactor;
 
-#define CORNER_RADIUS 12.0
+#define CORNER_RADIUS_WIDTH_SCALE_FACTOR 0.2
 #define PIP_WIDTH_SCALE_FACTOR 0.20
 #define CORNER_OFFSET 2
 #define DEFAULT_FACE_CARD_SCALE_FACTOR 0.9
 
 - (void)drawRect:(CGRect)rect
 {
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CORNER_RADIUS];
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.bounds.size.width * CORNER_RADIUS_WIDTH_SCALE_FACTOR];
     [roundedRect addClip];
     
     [[UIColor whiteColor] setFill];
@@ -86,7 +86,7 @@
 #pragma mark - Private methods
 - (NSString *)rankAsString
 {
-    return @[@"?",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"][self.rank];
+    return @[@"",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"][self.rank];
 }
 
 #pragma mark - Draw Pips

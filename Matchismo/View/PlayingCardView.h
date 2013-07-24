@@ -1,5 +1,5 @@
 //
-//  SuperCardView.h
+//  PlayingCardView.h
 //  SuperCard
 //
 //  Created by Xiyuan Liu on 7/9/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SuperCardView : UIView
+@interface PlayingCardView : UIView
 
 @property (nonatomic, strong) NSString *suit;
 @property (nonatomic) NSUInteger rank;
