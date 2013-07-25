@@ -16,6 +16,8 @@
 
 @implementation PlayingCardGameViewController
 
+#define ANIMATION_DURATION 0.2
+
 #pragma mark - setter and getter
 
 
@@ -46,19 +48,25 @@
     return [[PlayingCardDeck alloc] init];
 }
 
-- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animated:(BOOL)isAnimated
 {
     if ([cell isKindOfClass:[PlayingCardCollectionCell class]])
     {
         PlayingCardView *playingCardView = ((PlayingCardCollectionCell *)cell).playingCardView;
-        if ([card isKindOfClass:[PlayingCard class]])
+        [UIView transitionWithView:playingCardView
+                          duration:ANIMATION_DURATION
+                           options:(isAnimated) ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionNone
+                        animations:^
         {
-            PlayingCard *playingCard = (PlayingCard *)card;
-            playingCardView.rank = playingCard.rank;
-            playingCardView.suit = playingCard.suit;
-            playingCardView.faceUp = playingCard.isFaceUp;
-            playingCardView.alpha = playingCard.isUnplayable ? 0.3 : 1.0;
-        }
+            if ([card isKindOfClass:[PlayingCard class]])
+            {
+                PlayingCard *playingCard = (PlayingCard *)card;
+                playingCardView.rank = playingCard.rank;
+                playingCardView.suit = playingCard.suit;
+                playingCardView.faceUp = playingCard.isFaceUp;
+                playingCardView.alpha = playingCard.isUnplayable ? 0.3 : 1.0;
+            }
+        }completion:NULL];
     }
 }
 
@@ -79,10 +87,16 @@
             }
             if (card && [card isKindOfClass:[PlayingCard class]])
             {
-                PlayingCard *playingCard = (PlayingCard *)card;
-                playingCardView.rank = playingCard.rank;
-                playingCardView.suit = playingCard.suit;
-                playingCardView.faceUp = YES;
+                [UIView transitionWithView:playingCardView
+                                  duration:ANIMATION_DURATION
+                                   options:([cards count] == [self toMatchCardCount]) ? UIViewAnimationOptionTransitionFlipFromBottom : UIViewAnimationOptionTransitionNone
+                                animations:^
+                {
+                    PlayingCard *playingCard = (PlayingCard *)card;
+                    playingCardView.rank = playingCard.rank;
+                    playingCardView.suit = playingCard.suit;
+                    playingCardView.faceUp = YES;
+                } completion:NULL];
             }
             else
             {
@@ -92,5 +106,10 @@
             }
         }
     }
+}
+
+- (BOOL)willRemoveCard
+{
+    return NO;
 }
 @end

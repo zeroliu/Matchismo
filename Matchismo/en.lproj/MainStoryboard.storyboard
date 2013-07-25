@@ -108,7 +108,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal:" destination="bvv-mZ-Qh7" eventType="touchUpInside" id="XJa-07-5iF"/>
+                                    <action selector="restart:" destination="bvv-mZ-Qh7" eventType="touchUpInside" id="On4-mc-hCG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8g-ze-g5E">
@@ -122,10 +122,11 @@
                                 </state>
                                 <connections>
                                     <action selector="deal:" destination="2" eventType="touchUpInside" id="gtC-YI-ExW"/>
+                                    <action selector="dealCards:" destination="bvv-mZ-Qh7" eventType="touchUpInside" id="3Xo-5u-7aA"/>
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I4h-Mf-hZ1">
-                                <color key="backgroundColor" red="0.2892925931" green="0.7740743886" blue="0.1455196902" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="RUY-Cb-hlu">
                                     <size key="itemSize" width="61" height="85"/>
@@ -168,21 +169,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKf-kO-gB6" customClass="SetCardView">
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" type="user" id="B2n-YS-axS"/>
                                     <constraint firstAttribute="height" constant="49" type="user" id="TvL-X5-cez"/>
                                 </constraints>
                             </view>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3t-jl-lSS" customClass="SetCardView">
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" type="user" id="W9p-TF-Mh7"/>
                                     <constraint firstAttribute="width" constant="34" type="user" id="fsw-Ti-TUi"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOw-iU-DbA" customClass="SetCardView">
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" type="user" id="DdL-Wl-eyG"/>
                                     <constraint firstAttribute="height" constant="49" type="user" id="pbk-11-lB4"/>
@@ -201,16 +202,17 @@
                             <constraint firstItem="L62-Tj-mU0" firstAttribute="top" secondItem="XOw-iU-DbA" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="HCB-5f-rid"/>
                             <constraint firstItem="m3t-jl-lSS" firstAttribute="leading" secondItem="GKf-kO-gB6" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="LNa-Ic-A89"/>
                             <constraint firstItem="I8g-ze-g5E" firstAttribute="baseline" secondItem="KAD-nk-UgE" secondAttribute="baseline" type="default" id="NDU-Mj-04V"/>
-                            <constraint firstItem="vnb-Ts-xwf" firstAttribute="baseline" secondItem="MCg-Va-lPB" secondAttribute="baseline" type="default" id="QhS-Pa-zA5"/>
                             <constraint firstItem="L62-Tj-mU0" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="VGI-of-N4L"/>
                             <constraint firstItem="m3t-jl-lSS" firstAttribute="top" secondItem="I4h-Mf-hZ1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="XAA-lF-W1w"/>
+                            <constraint firstItem="I8g-ze-g5E" firstAttribute="bottom" secondItem="MCg-Va-lPB" secondAttribute="bottom" type="default" id="auY-wx-asV"/>
                             <constraint firstItem="vnb-Ts-xwf" firstAttribute="leading" secondItem="L62-Tj-mU0" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="b9o-QP-eom"/>
+                            <constraint firstAttribute="bottom" secondItem="I8g-ze-g5E" secondAttribute="bottom" constant="21" id="dvV-VB-R3J"/>
                             <constraint firstItem="KAD-nk-UgE" firstAttribute="leading" secondItem="I8g-ze-g5E" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ggA-LF-Ee3"/>
                             <constraint firstAttribute="bottom" secondItem="vnb-Ts-xwf" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="h4r-Sf-Xqe"/>
                             <constraint firstItem="I4h-Mf-hZ1" firstAttribute="top" secondItem="OSl-HS-VXc" secondAttribute="top" type="default" id="jcV-54-wmG"/>
                             <constraint firstItem="I4h-Mf-hZ1" firstAttribute="leading" secondItem="OSl-HS-VXc" secondAttribute="leading" type="default" id="mnb-If-7Sy"/>
+                            <constraint firstAttribute="bottom" secondItem="KAD-nk-UgE" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="q3y-kV-cRh"/>
                             <constraint firstItem="I4h-Mf-hZ1" firstAttribute="trailing" secondItem="OSl-HS-VXc" secondAttribute="trailing" type="default" id="uC2-xa-3VM"/>
-                            <constraint firstAttribute="bottom" secondItem="I8g-ze-g5E" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="zRz-Wf-YXJ"/>
                             <constraint firstItem="L62-Tj-mU0" firstAttribute="top" secondItem="GKf-kO-gB6" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="zVT-eQ-Haq"/>
                         </constraints>
                         <connections>
@@ -221,6 +223,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="I4h-Mf-hZ1" id="MrV-Ln-Wvk"/>
+                        <outlet property="dealButton" destination="I8g-ze-g5E" id="ZPn-tP-31D"/>
                         <outlet property="scoreLabel" destination="vnb-Ts-xwf" id="82L-fD-EXR"/>
                         <outlet property="scoreUpdateLabel" destination="MCg-Va-lPB" id="xxx-WM-Woe"/>
                         <outletCollection property="selectedCardsCollection" destination="XOw-iU-DbA" id="QFZ-Eh-X0b"/>
@@ -285,7 +288,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal:" destination="2" eventType="touchUpInside" id="67T-OM-NzW"/>
+                                    <action selector="restart:" destination="2" eventType="touchUpInside" id="JTb-bN-OJm"/>
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0XK-3W-cph">
@@ -390,9 +393,11 @@
         <class className="AbstractCardGameViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AbstractCardGameViewController.h"/>
             <relationships>
-                <relationship kind="action" name="deal:" candidateClass="UIButton"/>
+                <relationship kind="action" name="dealCards:" candidateClass="UIButton"/>
                 <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="action" name="restart:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="dealButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scoreUpdateLabel" candidateClass="UILabel"/>
                 <relationship kind="outletCollection" name="selectedCardsCollection" candidateClass="UIView"/>

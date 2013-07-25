@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Matchismo/Model/CardGame.m"
-         timestampString = "396145511.988075"
+         timestampString = "396425589.171044"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
          landmarkName = "-flipCardAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,12 +47,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Matchismo/SetGameViewController.m"
-         timestampString = "396343087.203151"
+         timestampString = "396428031.78133"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-updateCell:usingCard:"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-updateCell:usingCard:animated:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Matchismo/AbstractCardGameViewController.m"
+         timestampString = "396426193.265576"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "-collectionView:numberOfItemsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Matchismo/AbstractCardGameViewController.m"
+         timestampString = "396426193.265576"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "-updateUI:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

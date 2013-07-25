@@ -15,11 +15,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreUpdateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *selectedCardsCollection;
-@property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @property (strong, nonatomic) GameResult *gameResult;
 @property (strong, nonatomic) CardGame *game;
+@property (weak, nonatomic) IBOutlet UIButton *dealButton;
 @property (nonatomic) NSUInteger flipCount;
 @end
+
+#define ENABLED_DEAL_BUTTON_ALPHA 1.0
+#define DISABLED_DEAL_BUTTON_ALPHA 0.5
 
 @implementation AbstractCardGameViewController
 
@@ -30,7 +33,7 @@
     //sort selected card view by their tags in ascending order
     NSSortDescriptor *tagDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:YES];
     self.selectedCardsCollection = [self.selectedCardsCollection sortedArrayUsingDescriptors:@[tagDescriptor]];
-    [self updateUI];
+    [self updateUI:-1];
 }
 
 #pragma mark - setter and getter
@@ -49,27 +52,56 @@
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
     if (indexPath != nil)
     {
-        int index = indexPath.item;
+        NSUInteger index = indexPath.item;
         [self.game flipCardAtIndex:index];
-//        [self updateStatus];
         self.flipCount ++;
-        [self updateUI];
+        [self updateUI:index];
+        
         self.gameResult.score = self.game.score;
     }
 }
 
-- (IBAction)deal:(UIButton *)sender
+- (IBAction)restart:(UIButton *)sender
 {
     self.game = nil;
     self.flipCount = 0;
-    [self updateUI];
+    [self.cardCollectionView reloadData];
+    [self updateUI:-1];
     self.gameResult = nil;
+    self.dealButton.enabled = YES;
+    self.dealButton.alpha = ENABLED_DEAL_BUTTON_ALPHA;
+}
+
+#define DEFAULT_DEAL_CARDS_NUM 3
+- (IBAction)dealCards:(UIButton *)sender
+{
+    NSArray *addedCardsIndexes = [self.game dealCardsWithNumber:DEFAULT_DEAL_CARDS_NUM];
+    NSMutableArray *addedCardsIndexPaths = [[NSMutableArray alloc] initWithCapacity:[addedCardsIndexes count]];
+    for (NSNumber *cardIndex in addedCardsIndexes)
+    {
+        [addedCardsIndexPaths addObject:[NSIndexPath indexPathForItem:[cardIndex unsignedIntegerValue] inSection:0]];
+    }
+    
+    if ([addedCardsIndexPaths count] > 0)
+    {
+        [self.cardCollectionView performBatchUpdates:^{
+            [self.cardCollectionView insertItemsAtIndexPaths:addedCardsIndexPaths];
+        } completion:^(BOOL finished) {
+            [self.cardCollectionView scrollToItemAtIndexPath:[addedCardsIndexPaths lastObject] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+        }];
+    }
+    else
+    {
+        //run out of cards
+        self.dealButton.enabled = NO;
+        self.dealButton.alpha = DISABLED_DEAL_BUTTON_ALPHA;
+    }
 }
 
 #pragma mark - to be overridden methods
 - (Deck *)createDeck { return nil; } //abstract
 
-- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animated:(BOOL)isAnimated
 {
     //abstract
 }
@@ -80,7 +112,7 @@
     //abstract
 }
 
-- (void)updateUI
+- (void)updateUI:(NSUInteger)index
 {
     self.scoreLabel.text = [NSString stringWithFormat:@"%d", self.game.score];
     [self updateScoreChangeUI];
@@ -90,8 +122,23 @@
     {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         Card *card = [self.game cardAtIndex:indexPath.item];
-        [self updateCell:cell usingCard:card];
+        if (card.isUnplayable && [self willRemoveCard])
+        {
+            [self.game removeCardAtIndex:indexPath.item];
+            [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+        }
+        [self updateCell:cell usingCard:card animated:(indexPath.item == index)];
     }
+}
+
+- (void)removeCardAtIndexPath:(NSIndexPath *)indexPath fromCardsCollectionView:(UICollectionView *)cardCollectionView
+{
+    //abstract
+}
+
+- (BOOL)willRemoveCard
+{
+    return NO;
 }
 
 #pragma mark - UI update methods
@@ -117,30 +164,6 @@
         self.scoreUpdateLabel.alpha = 0;
     }
 }
-
-//- (void) updateStatus
-//{
-//    NSString *title = @"";
-//    //No match happened
-//    if ([self.game.cardsFlipped count])
-//    {
-//        if ([self.game.cardsFlipped count] < self.game.cardsToMatch)
-//        {
-//            title = [NSString stringWithFormat:@"Flipped %@", [[self.game.cardsFlipped lastObject] description]];
-//        }
-//        else
-//        {
-//            if (self.game.scoreChanged > 0)
-//            {
-//                title = [NSString stringWithFormat:@"Matched %@ for %d points", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
-//            }
-//            else
-//            {
-//                title = [NSString stringWithFormat:@"%@ don't match! %d points penalty", [self.game.cardsFlipped componentsJoinedByString:@" & "], self.game.scoreChanged];
-//            }
-//        }
-//    }
-//}
 
 #pragma mark - special initializer
 - (void)setup
@@ -170,14 +193,15 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.startingCardCount;
+    //TODO: Change the value while deleting cards or dealing more cards
+    return self.game.cardsInPlay;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.cellID forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
-    [self updateCell:cell usingCard:card];
+    [self updateCell:cell usingCard:card animated:NO];
     return cell;
 }
 

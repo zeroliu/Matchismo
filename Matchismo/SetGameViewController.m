@@ -15,6 +15,8 @@
 
 @implementation SetGameViewController
 
+#define ANIMATION_DURATION 0.2
+
 #pragma mark - setter and getter
 
 //- (GameResult *) gameResult
@@ -42,7 +44,7 @@
     return [[SetCardDeck alloc] init];
 }
 
-- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animated:(BOOL)isAnimated
 {
     if ([cell isKindOfClass:[SetCardCollectionCell class]])
     {
@@ -50,11 +52,19 @@
         if ([card isKindOfClass:[SetCard class]])
         {
             SetCard *setCard = (SetCard *)card;
-            setCardView.faceUp = setCard.isFaceUp;
-            setCardView.number = setCard.number;
-            setCardView.shading = setCard.shading;
-            setCardView.symbol = setCard.symbol;
-            setCardView.color = setCard.color;
+            //if card is unplayable, remove it
+            if (setCard.isUnplayable)
+            {
+                
+            }
+            else
+            {
+                setCardView.faceUp = setCard.isFaceUp;
+                setCardView.number = setCard.number;
+                setCardView.shading = setCard.shading;
+                setCardView.symbol = setCard.symbol;
+                setCardView.color = setCard.color;
+            }
         }
     }
 }
@@ -76,12 +86,18 @@
             }
             if (card && [card isKindOfClass:[SetCard class]])
             {
-                SetCard *setCard = (SetCard *)card;
-                setCardView.number = setCard.number;
-                setCardView.shading = setCard.shading;
-                setCardView.symbol = setCard.symbol;
-                setCardView.color = setCard.color;
-                setCardView.faceUp = YES;
+                [UIView transitionWithView:setCardView
+                                  duration:ANIMATION_DURATION
+                                   options:([cards count] == [self toMatchCardCount]) ? UIViewAnimationOptionTransitionFlipFromBottom : UIViewAnimationOptionTransitionNone
+                                animations:^
+                {
+                    SetCard *setCard = (SetCard *)card;
+                    setCardView.number = setCard.number;
+                    setCardView.shading = setCard.shading;
+                    setCardView.symbol = setCard.symbol;
+                    setCardView.color = setCard.color;
+                    setCardView.faceUp = NO;
+                } completion:NULL];
             }
             else
             {
@@ -93,6 +109,10 @@
             }
         }
     }
+}
 
+- (BOOL)willRemoveCard
+{
+    return YES;
 }
 @end

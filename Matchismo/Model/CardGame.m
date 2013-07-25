@@ -13,20 +13,26 @@
 @property (nonatomic, readwrite, getter = hasGameStarted) BOOL gameStarted;
 @property (nonatomic, readwrite) NSUInteger cardsToMatch;
 @property (nonatomic, strong) NSMutableArray *cards;
+@property (nonatomic, readonly) Deck *deck;
 @end
 
 @implementation CardGame
 
-- (NSMutableArray *) cards
+- (NSMutableArray *)cards
 {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
 }
 
-- (NSMutableArray *) cardsFlipped
+- (NSMutableArray *)cardsFlipped
 {
     if (!_cardsFlipped) _cardsFlipped = [[NSMutableArray alloc] init];
     return _cardsFlipped;
+}
+
+- (int)cardsInPlay
+{
+    return self.cards.count;
 }
 
 - (id) initWithCardCount:(NSUInteger)cardCount usingDeck:(Deck *)deck cardsToMatch:(NSUInteger)cardsToMatch
@@ -37,9 +43,10 @@
     {
         _gameStarted = NO;
         _cardsToMatch = cardsToMatch;
+        _deck = deck;
         for (int i = 0; i < cardCount; i++)
         {
-            Card *card = [deck drawRandomCard];
+            Card *card = [self.deck drawRandomCard];
             if (!card)
             {
                 self = nil;
@@ -50,15 +57,40 @@
                 self.cards[i] = card;
             }
         }
-        
     }
-    
     return self;
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index
 {
     return (index < [self.cards count] ? self.cards[index] : nil);
+}
+
+- (void)removeCardAtIndex:(NSUInteger)index
+{
+    if (index >= [self.cards count]) return;
+    [self.cards removeObjectAtIndex:index];
+}
+
+- (NSArray *)dealCardsWithNumber:(NSUInteger)cardNum
+{
+    NSMutableArray *addedCardsIndexes = [[NSMutableArray alloc] initWithCapacity:cardNum];
+    for (int i = 0; i<cardNum; i++)
+    {
+        Card *card = [self.deck drawRandomCard];
+        if (!card)
+        {
+            //run out of cards
+            break;
+        }
+        else
+        {
+            [self.cards addObject:card];
+            [addedCardsIndexes addObject:@([self.cards indexOfObject:card])];
+        }
+    }
+    
+    return addedCardsIndexes;
 }
 
 #define MATCH_BONUS 4
